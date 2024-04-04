@@ -1,6 +1,6 @@
 return {
   -- TODO: Remove branch v4 on release
-  { "AstroNvim/astrocommunity", branch = "v4" },
+  "AstroNvim/astrocommunity",
   -- example of importing a plugin, comment out to use it or add your own
   -- available plugins can be found at https://github.com/AstroNvim/astrocommunity
 
