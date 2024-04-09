@@ -23,6 +23,7 @@ return {
   -- color
   -- color picker and highlighter
   { import = "astrocommunity.color.ccc-nvim" },
+  { import = "astrocommunity.color.tint-nvim" },
   { import = "astrocommunity.colorscheme.catppuccin", enabled = true },
 
   -- Packs
