@@ -20,6 +20,9 @@ return {
     },
   },
 
+  -- lsp
+  { import = "astrocommunity.lsp.lsp-signature-nvim" },
+
   -- color
   -- color picker and highlighter
   { import = "astrocommunity.color.ccc-nvim" },
@@ -40,8 +43,4 @@ return {
   -- Version Control
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.git.git-blame-nvim" },
-
-  -- Code runner
-  { import = "astrocommunity.code-runner.sniprun" },
-  { import = "astrocommunity.code-runner.overseer-nvim" },
 }

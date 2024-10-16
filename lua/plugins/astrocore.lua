@@ -114,8 +114,6 @@ return {
         -- git-blame
         ["<leader>gg"] = { "<cmd>GitBlameToggle<cr>", desc = "Toggle git blame" },
         ["<leader>gx"] = { "<cmd>GitBlameCopyFileURL<cr>", desc = "Copy current line remote url to clipboard" },
-        -- code runner
-        ["<leader>r"] = { "<cmd>SnipRun<cr>" },
       },
       v = {
         -- Search inside visually highlighted text. Use `silent = false` for it to
@@ -132,8 +130,6 @@ return {
         ["<C-x>"] = [["+x]],
         -- range sort lines
         ["s"] = ":!sort<cr>",
-        -- code runner
-        ["<leader>r"] = { "<cmd>SnipRun<cr>" },
       },
     },
   },
