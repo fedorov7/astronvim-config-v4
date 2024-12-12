@@ -7,7 +7,8 @@
 if vim.g.neovide then
   vim.g.neovide_transparency = 0.95
   vim.g.neovide_input_macos_alt_is_meta = true
-  vim.cmd [[set guifont=MonoLisa,Symbols\ Nerd\ Font]]
+  vim.o.guifont = "FiraCode Nerd Font:h11"
+  vim.g.neovide_cursor_animate_command_line = false
   vim.g.neovide_cursor_vfx_mode = "railgun"
   vim.g.transparency = 0.95
 end
