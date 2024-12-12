@@ -39,6 +39,7 @@ return {
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.rust" },
+  { import = "astrocommunity.pack.harper" },
 
   -- Version Control
   { import = "astrocommunity.git.diffview-nvim" },
