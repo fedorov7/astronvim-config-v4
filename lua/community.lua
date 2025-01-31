@@ -29,6 +29,9 @@ return {
   { import = "astrocommunity.color.tint-nvim" },
   { import = "astrocommunity.colorscheme.catppuccin", enabled = true },
 
+  -- completion
+  { import = "astrocommunity.completion.copilot-cmp" },
+
   -- Packs
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.cmake" },
@@ -39,7 +42,6 @@ return {
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.rust" },
-  { import = "astrocommunity.pack.harper" },
 
   -- Version Control
   { import = "astrocommunity.git.diffview-nvim" },
