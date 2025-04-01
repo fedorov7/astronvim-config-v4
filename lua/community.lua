@@ -20,6 +20,13 @@ return {
     },
   },
 
+  -- Markdown
+  { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim" },
+
+  -- Editing support
+  { import = "astrocommunity.editing-support.bigfile-nvim" },
+  { import = "astrocommunity.editing-support.suda-vim" },
+
   -- lsp
   { import = "astrocommunity.lsp.lsp-signature-nvim" },
 
@@ -30,7 +37,7 @@ return {
   { import = "astrocommunity.colorscheme.catppuccin", enabled = true },
 
   -- completion
-  { import = "astrocommunity.completion.copilot-cmp" },
+  -- { import = "astrocommunity.completion.copilot-cmp" },
 
   -- Packs
   { import = "astrocommunity.pack.bash" },
