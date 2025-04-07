@@ -13,7 +13,7 @@ return {
       large_buf = { size = 1024 * 500, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
       cmp = true, -- enable completion at start
-      diagnostics_mode = 3, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
+      diagnostics = { virtual_text = true, virtual_lines = false }, -- diagnostic settings on startup
       highlighturl = true, -- highlight URLs at start
       notifications = true, -- enable notifications at start
     },
@@ -22,95 +22,68 @@ return {
       virtual_text = true,
       underline = true,
     },
+    -- passed to `vim.filetype.add`
+    filetypes = {
+      -- see `:h vim.filetype.add` for usage
+      extension = {
+        foo = "fooscript",
+      },
+      filename = {
+        [".foorc"] = "fooscript",
+      },
+      pattern = {
+        [".*/etc/foo/.*"] = "fooscript",
+      },
+    },
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
-        conceallevel = 1, -- enable conceal
         relativenumber = true, -- sets vim.opt.relativenumber
-        number = true, -- Show line numbers
-        undofile = true, -- Enable persistent undo (see also `:h undodir`)
-        breakindent = true, -- Indent wrapped lines to match line start
+        number = true, -- sets vim.opt.number
         spell = false, -- sets vim.opt.spell
-        signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-        wrap = true, -- sets vim.opt.wrap
-        clipboard = "", -- Remove connection to the system clipboard
-        splitbelow = true, -- Horizontal splits will be below
-        splitright = true, -- Vertical splits will be to the right
-        splitkeep = "screen", -- Reduce scroll during window
-        fillchars = "eob: ", -- Don't show `~` outside of buffer
-        backup = false, -- Don't store backup while overwriting the file
-        writebackup = false, -- Don't store backup while overwriting the file
-        incsearch = true, -- Show search results while typing
-        listchars = {
-          trail = "·",
-          tab = "│→",
-          -- eol = "⤶",
-          extends = "⟩",
-          precedes = "⟨",
-          nbsp = "␣",
-          -- space = '❤',
-        },
-        pumheight = 10, -- Make popup menu smaller
-        showbreak = "↪",
-        showtabline = (vim.t.bufs and #vim.t.bufs > 1) and 2 or 1,
-        completeopt = "menuone,noinsert,noselect", -- Customize completions
-        pumblend = 10, -- Make builtin completion menus slightly transparent
-        winblend = 10, -- Make floating windows slightly transparent
-        list = true, -- Show some helper symbols
+        signcolumn = "yes", -- sets vim.opt.signcolumn to yes
+        wrap = false, -- sets vim.opt.wrap
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
         -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
         gitblame_enabled = false, -- disable git blame by default
+        -- This can be found in the `lua/lazy_setup.lua` file
       },
     },
-    autocmds = {
-      auto_spell = {
-        {
-          event = "FileType",
-          desc = "Enable wrap and spell for text like documents",
-          pattern = { "gitcommit", "markdown", "text", "plaintex" },
-          callback = function()
-            vim.opt_local.wrap = true
-            vim.opt_local.spell = true
-          end,
-        },
-      },
-      autohide_tabline = {
-        {
-          event = "User",
-          desc = "Auto hide tabline",
-          pattern = "AstroBufsUpdated",
-          callback = function()
-            local new_showtabline = #vim.t.bufs > 1 and 2 or 1
-            if new_showtabline ~= vim.opt.showtabline:get() then vim.opt.showtabline = new_showtabline end
-          end,
-        },
-      },
-    },
+    -- Mappings can be configured through AstroCore as well.
+    -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = {
+      -- first key is the mode
       n = {
+        -- second key is the lefthand side of the map
+
+        -- navigate buffer tabs
+        ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
+        ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+
         -- mappings seen under group name "Buffer"
-        ["<Leader>bD"] = {
+        ["<Leader>bd"] = {
           function()
             require("astroui.status.heirline").buffer_picker(
               function(bufnr) require("astrocore.buffer").close(bufnr) end
             )
           end,
-          desc = "Pick to close",
+          desc = "Close buffer from tabline",
         },
+
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
-        ["<Leader>b"] = { desc = "Buffers" },
-        -- quick save
-        ["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
+        -- ["<Leader>b"] = { desc = "Buffers" },
+
+        -- setting a mapping to false will disable it
+        -- ["<C-S>"] = false,
+
         -- paste system clipboard
         ["<C-p>"] = [["+gP]],
         -- Copy/paste with system clipboard
         ["gp"] = { '"+p', desc = "Paste from system clipboard" },
         ["gP"] = { '"+P', desc = "Paste from system clipboard" },
-        -- file explorer toggle
-        ["<F12>"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" },
         -- git-blame
         ["<leader>gg"] = { "<cmd>GitBlameToggle<cr>", desc = "Toggle git blame" },
         ["<leader>gx"] = { "<cmd>GitBlameCopyFileURL<cr>", desc = "Copy current line remote url to clipboard" },
@@ -121,9 +94,6 @@ return {
         ["gy"] = { '"+y', desc = "Copy to system clipboard" },
         ["gp"] = { '"+p', desc = "Paste from system clipboard" },
         ["gP"] = { '"+P', desc = "Paste from system clipboard" },
-        -- Search visually selected text (slightly better than builtins in Neovim>=0.8)
-        ["*"] = { [[y/\V<C-R>=escape(@", '/\')<CR><CR>]] },
-        ["#"] = { [[y?\V<C-R>=escape(@", '?\')<CR><CR>]] },
         -- copy to system clipboard
         ["<C-c>"] = [["+y]],
         -- cut to system clipboard
