@@ -1,17 +1,21 @@
 ---@type LazySpec
 return {
-  -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
+  { "tpope/vim-abolish", lazy = false },
+  { "fedorov7/vim-uefi", ft = { "c", "uefi", "uni", "vfr" } },
   {
-    "L3MON4D3/LuaSnip",
-    config = function(plugin, opts)
-      require "astronvim.plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
-      -- add more custom luasnip configuration such as filetype extend or custom snippets
-      local luasnip = require "luasnip"
-      luasnip.filetype_extend("javascript", { "javascriptreact" })
+    "fedorov7/ksslint",
+    ft = { "c", "cpp" },
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "c", "cpp" },
+        callback = function(args)
+          vim.keymap.set("n", "<F4>", function()
+            require("lazy").load { plugins = { "ksslint" } }
+            vim.cmd "call KssMacroReplace()"
+          end, { buffer = args.buf, desc = "Run KSS macro replace" })
+        end,
+      })
     end,
   },
-  { "tpope/vim-abolish", lazy = false },
-  { "fedorov7/vim-uefi", ft = { "c", "uefi" } },
-  { "fedorov7/ksslint", ft = "c" },
-  { "mbbill/fencview", ft = "c" },
+  { "mbbill/fencview", cmd = { "FencView", "FencAutoDetect", "FencManualEncoding" } },
 }

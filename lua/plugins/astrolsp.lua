@@ -11,7 +11,8 @@ return {
     -- Configuration table of features provided by AstroLSP
     features = {
       codelens = true, -- enable/disable codelens refresh on start
-      inlay_hints = false, -- enable/disable inlay hints on start
+      inlay_hints = true, -- enable/disable inlay hints on start
+      signature_help = true, -- enable/disable automatic signature help
       semantic_tokens = true, -- enable/disable semantic token highlighting
     },
     -- customize lsp formatting options
@@ -44,7 +45,17 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       -- ["*"] = { capabilities = {} }, -- modify default LSP client settings such as capabilities
-      -- clangd = { capabilities = { offsetEncoding = { "utf-8" } }, filetypes = { "c", "cpp" } },
+      clangd = {
+        capabilities = { offsetEncoding = "utf-8" },
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--completion-style=detailed",
+          "--header-insertion=iwyu",
+          "--function-arg-placeholders=false",
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {

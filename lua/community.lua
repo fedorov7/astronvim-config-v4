@@ -15,6 +15,7 @@ return {
   -- Rainbow parens
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
   { import = "astrocommunity.editing-support.nvim-regexplainer" },
+  { import = "astrocommunity.editing-support.nvim-treesitter-context" },
   { import = "astrocommunity.editing-support.todo-comments-nvim" },
   {
     "folke/todo-comments.nvim",
@@ -24,16 +25,20 @@ return {
   },
 
   -- Markdown
-  { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim" },
+  { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
 
   -- Editing support
   { import = "astrocommunity.editing-support.bigfile-nvim" },
   { import = "astrocommunity.editing-support.suda-vim" },
 
-  -- lsp
-  { import = "astrocommunity.lsp.lsp-signature-nvim" },
+  -- Diagnostics and debugging
+  { import = "astrocommunity.diagnostics.trouble-nvim" },
+  { import = "astrocommunity.debugging.nvim-dap-virtual-text" },
 
-  -- color
+  -- Utilities
+  { import = "astrocommunity.utility.lua-json5" },
+
+  -- Color
   -- color picker and highlighter
   { import = "astrocommunity.color.ccc-nvim" },
   { import = "astrocommunity.color.tint-nvim" },
@@ -42,7 +47,7 @@ return {
   -- completion
   -- { import = "astrocommunity.completion.copilot-cmp" },
 
-  -- Packs
+  -- System development packs
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.cmake" },
   { import = "astrocommunity.pack.cpp" },
@@ -50,8 +55,11 @@ return {
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.markdown" },
-  { import = "astrocommunity.pack.python" },
-  { import = "astrocommunity.pack.rust" },
+  { import = "astrocommunity.test.neotest" },
+  { import = "astrocommunity.pack.python.base" },
+  { import = "astrocommunity.pack.python.basedpyright" },
+  { import = "astrocommunity.pack.python.ruff" },
+  { import = "astrocommunity.recipes.astrolsp-no-insert-inlay-hints" },
 
   -- Version Control
   { import = "astrocommunity.git.diffview-nvim" },

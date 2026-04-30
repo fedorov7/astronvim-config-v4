@@ -6,7 +6,7 @@ return {
     if vim.fn.argc() == 1 then
       local arg = vim.fn.argv(0)
       ---@cast arg string
-      local stat = vim.loop.fs_stat(arg)
+      local stat = vim.uv.fs_stat(arg)
       local adapter = string.match(arg, "^([%l-]*)://")
       if (stat and stat.type == "directory") or adapter == "oil-ssh" then require "oil" end
     end
@@ -75,7 +75,7 @@ return {
   },
   opts = {
     skip_confirm_for_simple_edits = true,
-    experimental_watch_for_changes = true,
+    watch_for_changes = true,
     keymaps = {
       ["<Tab>"] = "actions.close",
     },
