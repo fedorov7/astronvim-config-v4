@@ -34,14 +34,11 @@ return {
   -- Diagnostics and debugging
   { import = "astrocommunity.diagnostics.trouble-nvim" },
   { import = "astrocommunity.debugging.nvim-dap-virtual-text" },
+  { import = "astrocommunity.quickfix.quicker-nvim" },
 
   -- Utilities
   { import = "astrocommunity.utility.lua-json5" },
 
-  -- Color
-  -- color picker and highlighter
-  { import = "astrocommunity.color.ccc-nvim" },
-  { import = "astrocommunity.color.tint-nvim" },
   { import = "astrocommunity.colorscheme.catppuccin", enabled = true },
 
   -- completion
